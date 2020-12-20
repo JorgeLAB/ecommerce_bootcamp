@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 require "active_support/core_ext/integer/time"
 
+=======
+>>>>>>> Setup Refactoting
 # The test environment is used exclusively to run your application's
 # test suite. You never need to work with it otherwise. Remember that
 # your test database is "scratch space" for the test suite and is wiped
@@ -46,6 +49,7 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+<<<<<<< HEAD
   # Raise exceptions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
 
@@ -57,4 +61,8 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+=======
+  # Raises error for missing translations.
+  # config.action_view.raise_on_missing_translations = true
+>>>>>>> Setup Refactoting
 end

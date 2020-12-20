@@ -1,15 +1,21 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
   username: postgres
-  password: galileugalilei
+  password: password
+  host: db
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: bootcamp9_development
+  database: myapp_development
 
 test:
   <<: *default
-  database: bootcamp9_test
+  database: myapp_test
+
+production:
+  <<: *default
+  database: myapp_production
+  username: myapp
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
