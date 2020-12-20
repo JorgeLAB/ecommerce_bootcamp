@@ -5,23 +5,23 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+/bootcamp-api/.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+/bootcamp-api/log/*
+/bootcamp-api/tmp/*
+!/bootcamp-api/log/.keep
+!/bootcamp-api/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-/tmp/pids/*
-!/tmp/pids/
-!/tmp/pids/.keep
+/bootcamp-api/tmp/pids/*
+!/bootcamp-api/tmp/pids/
+!/bootcamp-api/tmp/pids/.keep
 
 # Ignore uploaded files in development.
-/storage/*
-!/storage/.keep
-.byebug_history
+/bootcamp-api/storage/*
+!/bootcamp-api/storage/.keep
+/bootcamp-api/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-/config/master.key
+/bootcamp-api/config/master.key
