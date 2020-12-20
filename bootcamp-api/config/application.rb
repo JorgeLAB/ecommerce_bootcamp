@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-require_relative "boot"
-=======
 require_relative 'boot'
->>>>>>> Setup Refactoting
 
 require "rails"
 # Pick the frameworks you want:
@@ -23,20 +19,6 @@ require "action_cable/engine"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-<<<<<<< HEAD
-module Bootcamp9
-  class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
-
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
-=======
 module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -46,7 +28,6 @@ module Myapp
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
->>>>>>> Setup Refactoting
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
