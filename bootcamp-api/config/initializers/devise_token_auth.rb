@@ -5,6 +5,9 @@ DeviseTokenAuth.setup do |config|
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
   # each request.
+
+  config.require_client_password_reset_token = true
+  
   config.change_headers_on_each_request = true
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
