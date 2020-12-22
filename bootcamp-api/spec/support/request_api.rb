@@ -1,7 +1,7 @@
 module RequestAPI
 	def body_json(symbolize_key: false)
 		json = JSON.parse(response.body)
-		symbolize_keys ? json.deep_symbolize_keys : json
+		symbolize_key ? json.deep_symbolize_keys : json
 	rescue
 		return {}
 	end
@@ -18,6 +18,6 @@ end
 
 # include this module in rspec processor. Only to the type request
 
-RSspec.configure do |config|
+RSpec.configure do |config|
 	config.include RequestAPI, type: :request
 end
