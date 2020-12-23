@@ -1,4 +1,4 @@
-RSpec.describe "Admin V1 Categories", type: :request do
+RSpec.describe "Admin V1 Categories as admin", type: :request do
 	let(:user) { create(:user) }
 
 	context 'GET /categories' do
