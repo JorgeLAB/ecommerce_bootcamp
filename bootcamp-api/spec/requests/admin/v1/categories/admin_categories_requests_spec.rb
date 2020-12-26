@@ -5,8 +5,9 @@ RSpec.describe "Admin V1 Categories as admin", type: :request do
 		let(:url) { '/admin/v1/categories'}
 		let!(:categories) { create_list(:category, 5) }
 
-		it "returns  " do
+		it "returns Categories" do
 			get url, headers: auth_header(user)
+
 			expect(body_json['categories']).to contain_exactly *categories.as_json( only: %i(id name) )
 		end
 		
