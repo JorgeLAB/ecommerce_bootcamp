@@ -39,7 +39,6 @@ describe Admin::ModelLoadingService do
 				expected_categories = categories[0..9]
 				expect( result_categories ).to contain_exactly *expected_categories
 			end
-			
 		end
 	end
 end
