@@ -12,7 +12,5 @@ module Admin
 											 .order(@params[:order].to_h)
 											 .paginate(@params[:page].to_i, @params[:length].to_i)
 		end
-		
-
 	end
 end
