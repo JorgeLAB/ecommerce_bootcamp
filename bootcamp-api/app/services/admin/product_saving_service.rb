@@ -5,7 +5,7 @@ module Admin
 		attr_reader :errors, :product 
 
 		def initialize( params, product = nil )
-			@params = params.deep_symbolize_keys
+			params = params.deep_symbolize_keys
 			@product_params = params.reject { |key| key == :productable_attributes }
 			@productable_params = params[:productable_attributes] || {}
 			@errors = {}
@@ -13,6 +13,7 @@ module Admin
 		end
 
 		def call
+
   		Product.transaction do
   		  @product.attributes = @product_params.reject { |key| key == :productable }
   		  build_productable
