@@ -1,19 +1,20 @@
 module Admin::V1
 	class SystemRequirementsController < ApiController
-		before_action :load_system_requirement, only: [:update, :destroy]
+		before_action :load_system_requirement, only: [:update, :destroy, :show]
 
 		def index
-			@system_requirements = SystemRequirement.all
-		end
+  		@loading_service = Admin::ModelLoadingService.new(SystemRequirement.all, searchable_params)
+  		@loading_service.call		
+  	end
 
 		def create
 			@system_requirement = SystemRequirement.new
-			@system_requirement.attributes = system_requirement_attributes
 			save_system_requirement!
 		end
+
+		def show; end
 		
 		def update
-			@system_requirement.attributes = system_requirement_attributes			
 			save_system_requirement!
 		end
 
@@ -25,16 +26,21 @@ module Admin::V1
 
 		private 
 
-		def load_system_requirement
-			@system_requirement = SystemRequirement.find(params[:id])
-		end
-
-		def system_requirement_attributes
+		def system_requirement_params
 			return {} unless params.has_key?(:system_requirement)
 			params.require(:system_requirement).permit(:name, :memory, :storage, :operational_system, :video_board, :processor)
 		end
 
-		def save_system_requirement!			
+		def load_system_requirement
+			@system_requirement = SystemRequirement.find(params[:id])
+		end
+
+		def searchable_params
+			params.permit( {seach: :name},{ order: {} }, :page, :length )
+		end
+
+		def save_system_requirement!
+			@system_requirement.attributes = system_requirement_params			
 			@system_requirement.save!
 
 			render :show 

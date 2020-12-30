@@ -1,19 +1,20 @@
 module Admin::V1
 	class UsersController < ApiController
-		before_action :load_user, only: [:update, :destroy]
+		before_action :load_user, only: [:update, :destroy, :show]
 
 		def index
-			@users = User.all
-		end
+  		@loading_service = Admin::ModelLoadingService.new(User.all, searchable_params)
+  		@loading_service.call		
+  	end
 
 		def create
 			@user = User.new
-			@user.attributes = user_attributes
 			save_user!
 		end
+
+		def show; end
 		
 		def update
-			@user.attributes = user_attributes			
 			save_user!
 		end
 
@@ -25,16 +26,21 @@ module Admin::V1
 
 		private 
 
-		def load_user
-			@user = User.find(params[:id])
-		end
-
-		def user_attributes
+		def user_params
 			return {} unless params.has_key?(:user)
-			params.require(:user).permit(:name, :email, :password, :password_confirmation,  :profile )
+			params.require(:user).permit( :name, :email, :password, :password_confirmation, :profile )
 		end
 
-		def save_user!			
+		def load_user
+			@user = User.find( params[:id] )
+		end
+
+		def searchable_params
+			params.permit({search: :name }, { order: {} }, :page, :length)
+		end
+
+		def save_user!
+			@user.attributes = user_params
 			@user.save!
 
 			render :show 
