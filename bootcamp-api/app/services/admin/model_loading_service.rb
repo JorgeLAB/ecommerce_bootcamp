@@ -12,9 +12,8 @@ module Admin
 
 		def call
 			fix_pagination_values
-			filtered = @searchable_model.search_by_name(@params.dig(:search, :name))
-			@records = filtered.order(@params[:order].to_h).pagination( @pagination[:page], @pagination[:length] ) 
-
+			filtered = set_search_by_name
+			@records = filtered.order(@params[:order].to_h).paginate( @pagination[:page], @pagination[:length] ) 
 			total_pages = (filtered.count / @pagination[:length].to_f).ceil
 			@pagination.merge!(total: filtered.count, total_pages: total_pages)
 
@@ -26,5 +25,12 @@ module Admin
 			@pagination[:page] = @searchable_model.model::DEFAULT_PAGE if @pagination[:page] <= 0 
 			@pagination[:length] = @searchable_model.model::MAX_PER_PAGE if @pagination[:length] <= 0 
 		end
+
+		def set_search_by_name
+			# adaptation
+			return @searchable_model.search_by_name(@params.dig(:search, :name)) if @searchable_model.respond_to?(:search_by_name)
+			@searchable_model
+		end
+		
 	end
 end
