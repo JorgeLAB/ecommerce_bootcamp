@@ -35,6 +35,8 @@ if Rails.env.development? || Rails.env.test?
 				game = create(:game, system_requirement: system_requirements.sample)
 				create(:product, name: game_name, status: availability, category_ids: game_categories_ids, productable: game) 
 			end
+
+			puts "Database was persisted"
 		end
 	end
 end
