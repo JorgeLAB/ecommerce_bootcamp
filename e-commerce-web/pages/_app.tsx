@@ -1,6 +1,7 @@
 import React from 'react';
 import { AppProps } from 'next/app';
-import Head from 'next/head'
+import Head from 'next/head';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import '../styles/globals.css'
 
