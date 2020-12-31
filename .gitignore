@@ -25,3 +25,38 @@ bootcamp-api/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
 bootcamp-api/config/master.key
+
+# e-commerce-web
+
+# dependencies
+e-commerce-web/node_modules
+e-commerce-web/.pnp
+e-commerce-web/.pnp.js
+
+# testing
+e-commerce-web/coverage
+
+# next.js
+e-commerce-web/.next/
+e-commerce-web/out/
+
+# production
+e-commerce-web/build
+
+# misc
+e-commerce-web/.DS_Store
+e-commerce-web/*.pem
+
+# debug
+e-commerce-web/npm-debug.log*
+e-commerce-web/yarn-debug.log*
+e-commerce-web/yarn-error.log*
+
+# local env files
+e-commerce-web/.env.local
+e-commerce-web/.env.development.local
+e-commerce-web/.env.test.local
+e-commerce-web/.env.production.local
+
+# vercel
+e-commerce-web/.vercel
