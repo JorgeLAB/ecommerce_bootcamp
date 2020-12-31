@@ -12,9 +12,10 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
 				<title> E-commerce storefront </title>
       	<meta name="viewport" content="initial-scale=1.0, width=device-width"/>
 			</Head>
+
 			<Component {...pageProps} />
 		</div>
 	)
 }
 
-export default MyApp
+export default MyApp;
