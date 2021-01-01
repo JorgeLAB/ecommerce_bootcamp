@@ -1,9 +1,14 @@
 import React from 'react';
+import MainComponent from '../components/shared/MainComponent';
+import { useRouter } from 'next/router';
 
 const Home: React.FC = () => {
+  const router = useRouter();
   return (
-   <div> Hello World</div>
-   )
+    <MainComponent>
+      <button onClick={ () => router.push('/Auth/Login') }> Login </button>
+    </MainComponent>
+  )
 }
 
-export default Home;     
+export default Home;
