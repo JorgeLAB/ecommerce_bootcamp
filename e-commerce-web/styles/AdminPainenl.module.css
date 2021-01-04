@@ -1,0 +1,30 @@
+.admin_painel {
+  background-color: var(--color-secondary);
+  padding: 30px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.admin_painel table {
+  color: var(--color-white);
+}
+
+.table_line {
+  background-color: var(--color-background);
+  padding-right: 110px;
+}
+
+.table_line:hover {
+  color: var(--color-white)!important;
+} 
+
+.modal {
+  top: 20%;
+}
+
+.modal_body {
+  background-color: var(--color-primary);
+  padding: 50px;
+  text-align: center;
+  font-size: 20px;
+}
