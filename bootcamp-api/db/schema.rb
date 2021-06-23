@@ -53,11 +53,11 @@ ActiveRecord::Schema.define(version: 2020_12_27_040822) do
 
   create_table "games", force: :cascade do |t|
     t.integer "mode"
+    t.string "developer"
     t.datetime "release_date"
     t.bigint "system_requirement_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "developer"
     t.index ["system_requirement_id"], name: "index_games_on_system_requirement_id"
   end
 
