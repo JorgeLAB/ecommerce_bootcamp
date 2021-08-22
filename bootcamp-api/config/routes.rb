@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         resources :system_requirements
         resources :users
         resources :products
+        get 'home' => 'home#index'
       end
     end
 
