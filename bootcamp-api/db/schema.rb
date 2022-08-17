@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_12_27_040822) do
     t.integer "mode"
     t.string "developer"
     t.datetime "release_date"
-    t.bigint "system_requirement_id", null: false
+    t.bigint "system_requirement_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["system_requirement_id"], name: "index_games_on_system_requirement_id"
@@ -118,7 +118,6 @@ ActiveRecord::Schema.define(version: 2020_12_27_040822) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "games", "system_requirements"
   add_foreign_key "product_categories", "categories"
   add_foreign_key "product_categories", "products"
 end

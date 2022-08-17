@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[6.0]
       t.integer :mode
       t.string :developer
       t.datetime :release_date
-      t.references :system_requirement, null: false, foreign_key: true
+      t.references :system_requirement
 
       t.timestamps
     end
