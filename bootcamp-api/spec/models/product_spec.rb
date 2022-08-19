@@ -8,7 +8,7 @@ RSpec.describe Product, type: :model do
 	it { should validate_numericality_of(:price).is_greater_than(0) }
 	it { should validate_presence_of(:image) }
 	it { should validate_presence_of(:status) }
-	it { should define_enum_for( :status ).with_values( {available: 1, unavailable: 2} ) }
+	it { should define_enum_for(:status).with_values({ available: 1, unavailable: 2 }) }
 
 
 	it { should belong_to(:productable) }
