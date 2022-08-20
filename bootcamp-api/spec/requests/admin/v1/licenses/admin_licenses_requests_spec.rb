@@ -76,46 +76,47 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
     end
   end
 
-  context 'POST /categories' do
-    let(:url) { '/admin/v1/categories'}
+  context 'POST /licenses' do
+    let(:url) { '/admin/v1/licenses'}
 
     context 'when params are valid' do
-      let!(:category_params) { {category: attributes_for(:category)}.to_json }
+      let(:user) { create(:user) }
+      let!(:license_params) { { license: { user_id: user.id } }.to_json }
 
-      it 'adds a new Category' do
+      it 'adds a new License' do
         expect do
-          post url, headers: auth_header(user), params: category_params
-        end.to change(Category, :count).by(1)
+          post url, headers: auth_header(user), params: license_params
+        end.to change(License, :count).by(1)
       end
 
-      it 'returns last added Category' do
-        post url, headers: auth_header(user), params: category_params
-        expect_category = Category.last.as_json(only: %i(id name))
-        expect(body_json['category']).to eq expect_category
+      it 'returns last added License' do
+        post url, headers: auth_header(user), params: license_params
+        expect_license = License.last.as_json(only: %i(id key))
+        expect(body_json['license']).to eq expect_license
       end
 
       it 'returns success status' do
-        post url, headers: auth_header(user), params: category_params
+        post url, headers: auth_header(user), params: license_params
         expect(response).to have_http_status(:ok)
       end
     end
 
     context 'when params are invalid' do
-      let!(:category_invalid_params){ {category: attributes_for(:category, name: nil) }.to_json }
+      let!(:license_invalid_params){ {license: attributes_for(:license, user_id: nil) }.to_json }
 
-      it 'does not add new Category' do
+      it 'does not add new License' do
         expect do
-          post url, headers: auth_header(user), params: category_invalid_params
-        end.to_not change(Category, :count)
+          post url, headers: auth_header(user), params: license_invalid_params
+        end.to_not change(License, :count)
       end
 
       it 'returns error message' do
-        post url, headers: auth_header(user), params: category_invalid_params
-        expect(body_json['errors']['fields']).to have_key('name')
+        post url, headers: auth_header(user), params: license_invalid_params
+        expect(body_json['errors']['fields']).to eq("Couldn't find User without an ID")
       end
 
       it 'returns unprocessable_entity status' do
-        post url, headers: auth_header(user), params: category_invalid_params
+        post url, headers: auth_header(user), params: license_invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
