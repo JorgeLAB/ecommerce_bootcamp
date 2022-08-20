@@ -1,6 +1,6 @@
 class Game < ApplicationRecord
   belongs_to :system_requirement
-  belongs_to :license
+  belongs_to :license, optional: true
   has_one :product, as: :productable
 
   validates :mode, presence: true
