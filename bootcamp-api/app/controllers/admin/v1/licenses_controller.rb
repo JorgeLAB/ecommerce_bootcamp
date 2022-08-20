@@ -1,6 +1,6 @@
 module Admin::V1
   class LicensesController < ApiController
-    before_action :load_license, only: [:show, :update]
+    before_action :load_license, only: [:show, :update, :destroy]
 
     def index
       @loading_service = Admin::ModelLoadingService.new(License.all, searchable_params)
@@ -27,6 +27,12 @@ module Admin::V1
       @license.save!
       render :show
 
+    rescue => e
+      render_error(fields: e)
+    end
+
+    def destroy
+      @license.destroy!
     rescue => e
       render_error(fields: e)
     end

@@ -12,7 +12,7 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
         expect(body_json['licenses'].count).to eq 10
       end
 
-      it "returns 10 first Categories" do
+      it "returns 10 first license" do
         get url, headers: auth_header(user)
         expected_licenses = licenses[0..9].as_json(only: %i(id key))
         expect(body_json['licenses']).to contain_exactly *expected_licenses
@@ -188,14 +188,14 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
     end
   end
 
-  context 'DELETE /categories/:id' do
-    let!(:category) { create(:category) }
-    let(:url){ "/admin/v1/categories/#{category.id}" }
+  context 'DELETE /licenses/:id' do
+    let!(:license) { create(:license) }
+    let(:url){ "/admin/v1/licenses/#{license.id}" }
 
-    it "removes Category" do
+    it "removes License" do
       expect do
         delete url, headers: auth_header(user)
-      end.to change(Category, :count).by(-1)
+      end.to change(License, :count).by(-1)
     end
 
     it "return success status" do
@@ -206,21 +206,6 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
     it "does not return any body content" do
       delete url, headers: auth_header(user)
       expect(body_json).to_not be_present
-    end
-
-    it "removes all associated product categories" do
-      product_categories = create_list(:product_category, 3, category: category)
-      delete url, headers: auth_header(user)
-      expected_product_category = ProductCategory.where( id: product_categories.map(&:id) )
-      expect(expected_product_category.count).to eq 0
-    end
-
-    it "does not remove unassociated product categories" do
-      product_categories = create_list(:product_category,3)
-      delete url, headers: auth_header(user)
-      present_product_categories_ids = product_categories.map(&:id)
-      expected_product_category = ProductCategory.where(id: present_product_categories_ids)
-      expect(expected_product_category.ids).to contain_exactly(*present_product_categories_ids)
     end
   end
 end
