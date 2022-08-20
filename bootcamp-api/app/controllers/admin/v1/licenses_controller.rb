@@ -1,6 +1,6 @@
 module Admin::V1
   class LicensesController < ApiController
-    before_action :load_license, only: [:show]
+    before_action :load_license, only: [:show, :update]
 
     def index
       @loading_service = Admin::ModelLoadingService.new(License.all, searchable_params)
@@ -21,6 +21,15 @@ module Admin::V1
     end
 
     def show; end
+
+    def update
+      @license.attributes = { key: params[:license][:key] }
+      @license.save!
+      render :show
+
+    rescue => e
+      render_error(fields: e)
+    end
 
     private
 

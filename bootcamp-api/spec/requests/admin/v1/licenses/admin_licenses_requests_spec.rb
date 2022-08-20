@@ -138,50 +138,50 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
     end
   end
 
-  context 'PATCH /categories/:id' do
-    let!(:category) {create(:category) }
-    let(:url) { "/admin/v1/categories/#{category.id}"}
+  context 'PATCH /licenses/:id' do
+    let!(:license) {create(:license) }
+    let(:url) { "/admin/v1/licenses/#{license.id}"}
 
     context 'with valid params' do
-      let(:new_name) { 'Adventure' }
-      let(:category_params) { { category: { name: new_name } }.to_json }
+      let(:new_key) { SecureRandom.hex(10) }
+      let(:license_params) { { license: { key: new_key } }.to_json }
 
-      it 'updates Category' do
-        patch url, headers: auth_header(user), params: category_params
-        category.reload
-        expect(category.name).to eq new_name
+      it 'updates License' do
+        patch url, headers: auth_header(user), params: license_params
+        license.reload
+        expect(license.key).to eq new_key
       end
 
-      it 'returns updated Category' do
-        patch url, headers: auth_header(user), params: category_params
-        category.reload
-        expected_category = category.as_json(only: %i(id name))
-        expect(body_json['category']).to eq expected_category
+      it 'returns updated license' do
+        patch url, headers: auth_header(user), params: license_params
+        license.reload
+        expected_license = license.as_json(only: %i(id key))
+        expect(body_json['license']).to eq expected_license
       end
 
-      it 'returns success Category' do
-        patch url, headers: auth_header(user), params: category_params
+      it 'returns success License' do
+        patch url, headers: auth_header(user), params: license_params
         expect(response).to have_http_status(:ok)
       end
     end
 
     context 'with invalid params' do
-      let(:category_invalid_params) { {category: attributes_for(:category, name: nil) }.to_json }
+      let(:license_invalid_params) { {license: attributes_for(:license, key: nil) }.to_json }
 
-      it "does not update Category" do
-        old_name = category.name
-        patch url, headers: auth_header(user), params: category_invalid_params
-        category.reload
-        expect(category.name).to eq old_name
+      it "does not update License" do
+        old_key = license.key
+        patch url, headers: auth_header(user), params: license_invalid_params
+        license.reload
+        expect(license.key).to eq old_key
       end
 
       it "returns error message" do
-        patch url, headers: auth_header(user), params: category_invalid_params
-        expect(body_json['errors']['fields']).to have_key('name')
+        patch url, headers: auth_header(user), params: license_invalid_params
+        expect(body_json['errors']['fields']).to eq('A validação falhou: Key não pode ficar em branco')
       end
 
       it "returns unprocessable_entity status" do
-        patch url, headers: auth_header(user), params: category_invalid_params
+        patch url, headers: auth_header(user), params: license_invalid_params
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
