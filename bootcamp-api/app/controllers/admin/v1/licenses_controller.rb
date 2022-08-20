@@ -20,12 +20,12 @@ module Admin::V1
       render_error(fields: e)
     end
 
-    def show;end
+    def show; end
 
     private
 
     def load_license
-      License.find(params[:id])
+      @license = License.find(params[:id])
     end
 
     def searchable_params

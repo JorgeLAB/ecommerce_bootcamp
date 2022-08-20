@@ -122,14 +122,14 @@ RSpec.describe "Admin V1 Licenses as admin", type: :request do
     end
   end
 
-  context 'GET /categories/:id' do
-    let!(:category){ create(:category) }
-    let(:url) { "/admin/v1/categories/#{category.id}"}
+  context 'GET /licenses/:id' do
+    let!(:license){ create(:license) }
+    let(:url) { "/admin/v1/licenses/#{license.id}"}
 
-    it "returns requested category" do
+    it "returns requested license" do
       get url, headers: auth_header(user)
-      expected_category = category.as_json(only: %i(id name))
-      expect(body_json['category']).to contain_exactly *expected_category
+      expected_license = license.as_json(only: %i(id key))
+      expect(body_json['license']).to contain_exactly *expected_license
     end
 
     it "returns success status" do
