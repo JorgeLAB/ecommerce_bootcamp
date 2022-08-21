@@ -6,6 +6,6 @@ RSpec.describe License, type: :model do
   it { should validate_presence_of(:key) }
   it { should validate_uniqueness_of(:key) }
 
-  it { should belong_to :user }
+  it { should belong_to(:user).optional }
   it { should have_many :games }
 end
