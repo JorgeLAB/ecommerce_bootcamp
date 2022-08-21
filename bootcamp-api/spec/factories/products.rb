@@ -6,6 +6,7 @@ FactoryBot.define do
 
     image { FactoryHelpers.upload_file(Rails.root.join("spec/support/images/product_image.png"), 'image/png', true) }
     status { :available }
+    featured { true }
 
     after :build do |product|
     	product.productable ||= create(:game)

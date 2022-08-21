@@ -448,7 +448,7 @@ end
 # generate product test for compare json returns.
 
 def build_game_product_json(product)
-  json = product.as_json(only: %i( id name description price status ) )
+  json = product.as_json(only: %i( id name description price status featured) )
   json['categories'] = product.categories.map(&:name)
   json['image_url'] = rails_blob_url(product.image)
   json['productable'] = product.productable_type.underscore

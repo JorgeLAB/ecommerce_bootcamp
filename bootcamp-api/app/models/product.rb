@@ -10,6 +10,8 @@ class Product < ApplicationRecord
     validates :price, numericality: { greater_than: 0}
   end
 
+  validates :featured, presence: true, if: -> { featured.nil? }
+
   enum status: { available: 1, unavailable: 2 }  
 
   include NameSearchable
