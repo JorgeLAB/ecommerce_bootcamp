@@ -12,7 +12,7 @@ module Admin
 
     def call
       set_pagination_values
-      filtered = set_search_by_name
+      filtered = search_records(@searchable_model)
       @records = filtered.order(@params[:order].to_h).paginate( @params[:page], @params[:length] )
       set_pagination_attributes(filtered.count)
     end
@@ -32,9 +32,19 @@ module Admin
                          total: total_filtered, total_pages: total_pages)
     end
 
+    def search_records(searched)
+      return searched unless @params.has_key?(:search)
+
+      @params[:search].each do |key, value|
+        searched = searched.like(key, value)
+      end
+
+      searched
+    end
+
     def set_search_by_name
       # adaptation
-      return @searchable_model.search_by_name(@params.dig(:search, :name)) if @searchable_model.respond_to?(:search_by_name)
+      return @searchable_model.like(@params.dig(:search, :name), @params.dig(:search, :name)) if @searchable_model.respond_to?(:search_by_name)
       @searchable_model
     end
 
