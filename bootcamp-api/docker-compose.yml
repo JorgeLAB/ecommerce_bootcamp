@@ -1,13 +1,12 @@
 version: "3.3"
-volumes:
-  db_data:
+
 services:
   db:
     image: postgres
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - "5433:5432"
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: password
   web:
@@ -30,3 +29,6 @@ services:
     ports:
      - "1025:1025"
      - "1080:1080"
+
+volumes:
+  db_data:

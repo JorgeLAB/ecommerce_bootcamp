@@ -8,11 +8,14 @@ Rails.application.routes.draw do
         resources :system_requirements
         resources :users
         resources :products
+        resources :licenses
+        get 'home' => 'home#index'
       end
     end
 
     namespace :storefront do
       namespace :v1 do
+        get 'home' => 'home#index'
       end
     end
 end
