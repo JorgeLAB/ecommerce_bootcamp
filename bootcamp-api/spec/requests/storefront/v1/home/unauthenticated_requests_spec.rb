@@ -50,7 +50,7 @@ RSpec.describe 'Storefront V1 Home', type: :request do
       end
     end
 
-    context 'on :last_realeses' do
+    context 'on :last_releases' do
       it 'returns 4 products' do
         get url, headers: unauthenticated_header
         expect(body_json['last_releases'].count).to eq 4
@@ -63,7 +63,7 @@ RSpec.describe 'Storefront V1 Home', type: :request do
           build_game_products_json(product)
         end
 
-        expect(body_json['last_realeses']).to satisfy do |products|
+        expect(body_json['last_releases']).to satisfy do |products|
           products & expected_products == products
         end
       end
@@ -74,7 +74,7 @@ RSpec.describe 'Storefront V1 Home', type: :request do
           build_game_products_json(product)
         end
 
-        expect(body_json['last_realeses']).to_not include *unexpected_products
+        expect(body_json['last_releases']).to_not include *unexpected_products
       end
     end
 
@@ -108,7 +108,7 @@ RSpec.describe 'Storefront V1 Home', type: :request do
   def build_game_products_json(product)
     json = product.as_json(only: %i(id name description))
     json['price'] = product.price.to_f
-    json['iamge_url'] = rails_blob_url(product.image)
+    json['image_url'] = rails_blob_url(product.image)
     json
   end
 end
