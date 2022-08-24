@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include Rails.application.routes.url_helpers
+
   belongs_to :productable, polymorphic: true
   has_many :product_categories, dependent: :destroy
   has_many :categories, through: :product_categories
@@ -16,4 +18,12 @@ class Product < ApplicationRecord
 
   include NameSearchable
   include Paginatable
+
+  def to_home_builder
+    Jbuilder.new do |product|
+      product.(self, :id, :name, :description)
+      product.price price.to_f
+      product.image_url rails_blob_path(image, disposition: "attachment", only_path: true)
+    end
+  end
 end
