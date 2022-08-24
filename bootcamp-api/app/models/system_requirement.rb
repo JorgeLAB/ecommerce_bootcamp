@@ -7,6 +7,6 @@ class SystemRequirement < ApplicationRecord
 	validates :video_board, presence: true
 	validates :processor, presence: true
 
-	include NameSearchable
+	include LikeSearchable
 	include Paginatable
 end
