@@ -44,26 +44,26 @@ module Storefront
       return @records.all unless @params.has_key?(:search)
       filtered_records = @records.like(:name, @params[:search])
       filtered_records = filtered_records.or(@records.like(:description, @params[:search]))
-      filtered_records.or @records.merge(Game.like(:developer, @params[:seearch]))
+      filtered_records.or filtered_records.merge(Game.like(:developer, @params[:seearch]))
     end
 
     def filter_by_categories
       return @records.all unless @params.has_key?(:category_ids)
-      @records.where(categories: { id: @params[:category_ids]})
+      @records.where(categories: { id: @params[:category_ids] })
     end
 
     def filter_by_price
       min_price = @params.dig(:price, :min)
       max_price = @params.dig(:price, :max)
-      return @records.all if min_price.blank? || max_price.blank?
+      # TODO: O codigo oficial nao esta igual
+      return @records.all unless min_price.present? || max_price.present?
       @records.where(price: min_price..max_price)
     end
 
     def filter_by_release_date
-      min_date = Time.parse(@parmas.dig(:release_date, :min)).beginning_of_day rescue nil
-      max_date = Time.parse(@parmas.dig(:release_date, :max)).beginning_of_day rescue nil
-
-      return @records.all if min_date.blank? || max_date.blank?
+      min_date = Time.parse(@params.dig(:release_date, :min)).beginning_of_day rescue nil
+      max_date = Time.parse(@params.dig(:release_date, :max)).beginning_of_day rescue nil
+      return @records.all unless min_date.present? || max_date.present?
       Game.where(release_date: min_date..max_date)
     end
 

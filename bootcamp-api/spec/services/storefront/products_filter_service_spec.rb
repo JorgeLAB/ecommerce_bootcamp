@@ -94,13 +94,13 @@ describe Storefront::ProductsFilterService do
       it "sets right :total" do
         service = described_class.new(params)
         service.call
-        expect(service.pagination[:total]).to eq 15
+        expect(service.pagination[:total]).to eq 10
       end
 
       it "sets right :total_pages" do
         service = described_class.new(params)
         service.call
-        expect(service.pagination[:total_pages]).to eq 2
+        expect(service.pagination[:total_pages]).to eq 1
       end
     end
 
@@ -321,7 +321,7 @@ describe Storefront::ProductsFilterService do
       let!(:recently_released_products) do
         products = []
         5.times do |n|
-          game = create(:game, release_date: (0..7).to_a.sample.days.ago)
+          game = create(:game, release_date: (1..7).to_a.sample.days.ago)
           products << create(:product, productable: game)
         end
         products
@@ -386,7 +386,7 @@ describe Storefront::ProductsFilterService do
       end
 
       context "only :max fulfilled" do
-        let(:params) { { release_date: { max: 8.days.ago.to_s } } }
+        let(:params) { { release_date: { max: 7.days.ago.to_s } } }
 
         it "returns 10 records" do
           service = described_class.new(params)
@@ -436,7 +436,7 @@ describe Storefront::ProductsFilterService do
 
       context "both :min and :max fulfilled" do
         let(:params) do
-          { release_date: { min: 14.days.ago.to_s, max: Time.zone.now.to_s } }
+          { release_date: { min: 15.days.ago.to_s, max: Time.zone.now.to_s } }
         end
 
         it "returns 10 records" do
@@ -542,7 +542,7 @@ describe Storefront::ProductsFilterService do
         end
 
         it "returns ordered products limited by default pagination" do
-          service = described_class.new(params)
+          service = described_class .new(params)
           service.call
           general_products.sort! { |a, b| b[:price] <=> a[:price] }
           expect(service.records.to_a).to satisfy do |records|
