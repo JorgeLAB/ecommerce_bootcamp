@@ -18,7 +18,7 @@ end
 
 if Rails.env.development? || Rails.env.test?
 	require 'factory_bot'
-  FactoryBot.definition_file_paths = Dir[Rails.root.join('spec', 'factories', '**', '*.rb')].sort.each { |f| require f }
+  # FactoryBot.definition_file_paths = Dir[Rails.root.join('spec', 'factories', '**', '*.rb')].sort.each { |f| require f }
 
 	namespace :dev do
 		desc 'Sample data for local development environment'
@@ -52,7 +52,7 @@ if Rails.env.development? || Rails.env.test?
 				game_categories_ids = []
 				categories_count.times { game_categories_ids << Category.all.sample.id }
 				game = create(:game, system_requirement: system_requirements.sample)
-				create(:product, name: game_name, status: availability, category_ids: game_categories_ids, productable: game) 
+				# create(:product, name: game_name, status: availability, category_ids: game_categories_ids, productable: game)
 			end
 
 			puts "Database was persisted"
