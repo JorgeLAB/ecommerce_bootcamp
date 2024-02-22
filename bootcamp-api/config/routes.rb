@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     namespace :storefront do
       namespace :v1 do
         get 'home' => 'home#index'
+
+        resources :products, only: [:index]
       end
     end
 end
