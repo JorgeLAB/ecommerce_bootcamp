@@ -2,7 +2,10 @@ FROM ruby:2.7.1
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 RUN apt install libpq-dev
+RUN apt install libpq
 RUN apt install build-essential
+RUN apt install libsqlite3-dev
+RUN apt install sqlite3
 RUN mkdir /myapp
 WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
