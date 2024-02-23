@@ -7,6 +7,8 @@ class SystemRequirement < ApplicationRecord
 	validates :video_board, presence: true
 	validates :processor, presence: true
 
+  has_many :games, dependent: :restrict_with_error
+
 	include LikeSearchable
 	include Paginatable
 end
