@@ -2,8 +2,10 @@
 
 DeviseTokenAuth.setup do |config|
   # Faz o token mudar a cada requisição
-  config.require_client_password_reset_token = true
   config.change_headers_on_each_request = true
+
+  # Mudanca de senha
+  config.require_client_password_reset_token = true
 
   # Vida util do token
   config.token_lifespan = 1.weeks

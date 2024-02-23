@@ -1,23 +1,23 @@
 Rails.application.routes.draw do
-    mount_devise_token_auth_for 'User', at: 'auth/v1/user'
+  mount_devise_token_auth_for 'User', at: 'auth/v1/user'
 
-    namespace :admin do
-      namespace :v1 do
-        resources :categories
-        resources :coupons
-        resources :system_requirements
-        resources :users
-        resources :products
-        resources :licenses
-        get 'home' => 'home#index'
-      end
+  namespace :admin do
+    namespace :v1 do
+      resources :categories
+      resources :coupons
+      resources :system_requirements
+      resources :users
+      resources :products
+      resources :licenses
+      get 'home' => 'home#index'
     end
+  end
 
-    namespace :storefront do
-      namespace :v1 do
-        get 'home' => 'home#index'
+  namespace :storefront do
+    namespace :v1 do
+      get 'home' => 'home#index'
 
-        resources :products, only: [:index]
-      end
+      resources :products, only: [:index]
     end
+  end
 end

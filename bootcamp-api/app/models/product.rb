@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   with_options presence: true do
     validates :status, :description, :image
     validates :name, uniqueness: { case_sensitive: false }
-    validates :price, numericality: { greater_than: 0}
+    validates :price, numericality: { greater_than: 0 }
   end
 
   validates :featured, presence: true, if: -> { featured.nil? }
